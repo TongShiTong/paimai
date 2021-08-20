@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌地瓜安装包下载</title>
+    <!-- <link id="linkPc" rel="stylesheet" href="./index.css"> -->
+</head>
+<body>
+    <div class="content">
+        <div class="ioc">
+            <h2>萌地瓜ios</h2>
+            <h3>测试服</h3>
+            <div class="box">
+                <ul>
+                    <li><a href="">最新文件名1.bmg</a></li>
+                </ul>
+            </div>
+            <h3>正式服</h3>
+            <div class="box">
+                <ul>
+                    <li><a href="">最新文件名1.bmg</a></li>
+                    <li><a href="">最新文件名2.bmg</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="android">
+            <h2>萌地瓜Android</h2>
+            <h3>测试服</h3>
+            <div class="box">
+                    <li><a href="">最新文件名1.bmg</a></li>
+            </div>
+            <h3>正式服</h3>
+            <div class="box">
+                <ul>
+                    <li><a href="">最新文件名1.bmg</a></li>
+                    <li><a href="">最新文件名2.bmg</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="upload">
+            <input type="file" id="file" multiple="multiple" onchange="handleFile()">
+            <select id="select1" onchange="handleSelect()">
+                <!-- <option value ="选择客户端"></option> -->
+                <option value='' disabled selected style='display:none;'>选择客户端</option>  
+                <option value="ios" style="color: #333;border: none;outline: none;">ios</option>
+                <option value="Android" style="color: #333;border: none;outline: none;">Android</option>
+            </select>
+            <select id="select2" onchange="handleSelectType()">
+                <!-- <option value ="选择服务类型"></option> -->
+                <option value='' disabled selected style='display:none;'>选择服务类型</option>  
+                <option value="测试服" style="color: #333;border: none;outline: none;">测试服</option>
+                <option value="正式服" style="color: #333;border: none;outline: none;">正式服</option>
+            </select>
+            <input type="text" name="name" id="name" placeholder="输入文件名" onchange="handleName()">
+            <div class="btn">
+                <button style="margin-right: 20px;">取消</button>
+                <button>确认</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./jquery.1.11.3.js"></script>
+<script type="text/javascript">
+
+    (function () {
+        var sUserAgent = navigator.userAgent;
+        if (sUserAgent.indexOf('Android') > -1 || sUserAgent.indexOf('iPhone') > -1 || sUserAgent.indexOf('iPad') > -1 || sUserAgent.indexOf('iPod') > -1 || sUserAgent.indexOf('Symbian') > -1) {
+            console.log(1,location)  
+            console.log(document.head)  
+            // document.head.removeChild(document.getElementById("linkPc"))
+            var link = document.createElement("link");
+            link.setAttribute("id", "phone");
+            link.setAttribute("rel", "stylesheet");
+            link.setAttribute("type", "text/css");
+            link.setAttribute("href", "./downLoad.css");
+            document.getElementsByTagName('head')[0].appendChild(link)  
+            $('.upload').css('display','none')
+        } else {
+            console.log(2,location)  
+            console.log(document.head)
+            // document.head.removeChild(document.getElementById("phone"))
+            var link = document.createElement("link");
+            link.setAttribute("id", "linkPc");
+            link.setAttribute("rel", "stylesheet");
+            link.setAttribute("type", "text/css");
+            link.setAttribute("href", "./index.css");
+            document.getElementsByTagName('head')[0].appendChild(link)  
+            $('.upload').css('display','block')
+            // location.href = 'http://lsp.jiuduanfw.com/down/index1.html';  
+        }        
+    })(); 
+    // var baseUrl = 'http://fanyacar.weixinzjit.com/index.php/api/index/';//基础链接
+    // var isDebug = false;//是否开启打印模式
+    // var Api = {
+    //     point:'point',//接口的参数
+        
+    //     doPost : function(api,data,success){
+    //         var url = baseUrl+api;
+    //         if(isDebug){
+    //             console.log('[URL]'+url);
+    //             console.log('[PARM]'+JSON.stringify(data));
+    //         }
+    //         $.post(url, data, function(obj){ if(isDebug) console.log('[Res]'+JSON.stringify(obj)); success(obj); }, 'json' );
+    //     },
+        
+    //     doGet : function(api,data,success,error){
+    //         var url = baseUrl+api+data;
+    //         if(isDebug){
+    //             console.log('[URL]'+url);
+    //             console.log('[PARM]'+JSON.stringify(data));
+    //         } 
+    //         $.get(url,function(obj){ obj = JSON.parse(obj); if(isDebug) console.log('[Res]'+JSON.stringify(obj)); success(obj); });
+    //     }
+        
+    // }
+    function handleFile() {
+        // let $icon = $(".upload-icon");  
+        let formData = new FormData(),
+            fs = $("#file")[0].files;  
+            console.log(fs)
+        let max_size = 1024 * 1024 * 100 
+
+        for (let i = 0; i < fs.length; i++) {
+            let d = fs[0]
+            if(d.size <= max_size){  //文件必须小于100M
+                if(/.(PDF|pdf|DOC|doc|DOCX|docx|apk|bmg)$/.test(d.name)){ //文件必须为文档
+                    formData.append("files", fs[i]);  //文件上传处理
+                    console.log(formData)
+                }else{
+                    alert('上传文件必须是PDF或DOC！')
+                    return false
+                }
+
+            }else{
+                alert('上传文件过大！')
+                return false
+            }
+        }
+
+        // $icon.removeClass("hidden");
+
+        $.ajax({
+            type: "POST",
+            url: "/uploader/file",
+            data: formData,
+            cache: false,
+            processData: false, 
+            contentType: false
+        }).then(res => {
+            // $icon.addClass("hidden");
+            
+            if (res.code == 200) {
+                // if (res.data && res.data.length > 0) {
+                //     let _html = '';
+                //     res.data.forEach(d => {
+                //     _html += `
+                //         <li data-url="${d.url}">
+                //         <span>${d.fileName}</span>
+                //         <img class="delete" src="./images/delete.png" alt="">
+                //         </li>
+                //     `;
+                //     });
+                //     $(".upload-content .upload-list").append(_html);
+                // }
+            } else {
+                alert(res.msg);
+            }
+        });
+    };
+    function handleSelect() {
+        var client = $('#select1').val()
+        $('#select1').css('color','#000')
+        console.log(client)
+    };
+    function handleSelectType() {
+        var type = $('#select2').val()
+        $('#select2').css('color','#000')
+        console.log(type)
+    };
+    function  handleName() {
+        var name = $('#name').val()
+        console.log(name)
+    };
+
+</script>
+</html>

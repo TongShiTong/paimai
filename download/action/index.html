@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
+	<title>APP下载</title>
+	</head>
+    <style>
+        html {
+            font-size: 13.3333333333333vw;
+            /* 1rem = 100px */
+        }
+    </style>
+	<style type="text/css">
+	*{padding: 0;margin: 0;}
+	/*顶部标题栏*/
+	.title_box {
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		/* background: #48d484; */
+		font-size:0.3rem;
+		display:flex;
+	}
+
+	.back_page,.back_home {
+		flex:1;	
+	}
+	.back_page img,.back_home img{
+		width: 32px;
+		height: 32px;
+		margin-top:8px;
+	}
+	.back_page{
+		text-align: left;
+	}
+	.back_home{
+		text-align: right;
+		margin-right:10px;
+	}
+	.title_box p {
+		flex:3;
+        font-weight: 500;
+		text-align: center;
+		color: #000000;
+	}
+	#weixin-tip {
+		display: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		background: rgba(0, 0, 0, 0.8);
+		filter: alpha(opacity=80);
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+	}		
+	#weixin-tip p {
+		text-align: center;
+		margin-top: 10%;
+		padding: 0 5%;
+		position: relative;
+	}
+	#weixin-tip p img{
+		width:100%;
+	}
+	#weixin-tip .close {
+		position: absolute;
+		width:50px;
+		top: 0;
+		left: 5%;
+	}
+	.app-box{
+		width:100%;
+		display: flex;
+	}
+    .app-box .info {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0.96rem;
+    }
+	
+	.app-box .info img{
+        width:1.75rem;
+        height: 1.75rem;
+    }
+    .app-box .info .app-btn {
+        width: 3.19rem;
+        height: 1.05rem;
+        background: #1D1E1F;
+        border-radius: 0.21rem;
+        font-size: 0.35rem;
+        color: #ffffff;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.05rem;
+    }
+
+    .logo  {
+        text-align: center;
+        margin: 1rem 0;
+    }
+    .logo img{
+        width: 6.94rem;
+        height: 6.94rem;
+
+    }
+	</style>
+    <body>
+	<!--标题-->
+	<div class="title_box">
+		<!-- <a href="javascript:;" onClick="javascript:history.back(-1);" class="back_page"><img src="./images/title-back.png"></a> -->
+		<p>APP下载</p>
+		<!-- <a href="/" class="back_home"><img src="./images/title-home.png" alt="返回首页"/></a> -->
+	</div>
+	<!-- <div class="desc">
+        <h1>立即下载手机客户端</h1>
+        <p>随时随地，想玩就玩。</p>
+	</div> -->
+    <div class="logo">
+        <img src="./images/logo.png" alt="">
+    </div>
+
+	<div class="app-box">
+        <div class="info">
+            <img src="./images/android.png"/>
+            <div class="app-btn" id="download_android">
+                安卓下载
+            </div>
+        </div>
+		<div class="info">
+            <img src="./images/ios.png"/>
+            <div class="app-btn" id="download_ios">
+                苹果下载
+            </div>
+        </div>
+	</div>
+    <div id="weixin-tip">
+		<p><img src="./images/info.png"/>
+		<img id="close"  title="关闭" class="close" src="./images/close.png"/>
+		</p>
+	</div>
+	<script src="./jquery.1.11.3.js"></script>
+	<script type="text/javascript">
+        //判断是不是微信端
+	var is_weixin = (function() {
+		return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1
+	})();
+	var tip = document.getElementById('weixin-tip');
+	var close = document.getElementById('close');
+	var tip = document.getElementById('weixin-tip');
+	var android = document.getElementById('download_android');
+	var ios = document.getElementById('download_ios');
+	var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight; //兼容IOS，不需要的可以去掉	
+	window.onload = function() {				
+		if(is_weixin) {				
+			tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+			tip.style.display = 'block';		
+		}else{						
+			//判断Android
+			if (/(Android)/i.test(navigator.userAgent)) {   
+				//直接下载
+				var android_url="https://dowlond-menggua-app.oss-cn-beijing.aliyuncs.com/dowlond/TurnAround.apk?Expires=1628930307&OSSAccessKeyId=TMP.3KdSb2MvJRLWSK8h9Rzaug5W6vSCQ1Ak6avHur75V3U44eqM81yFSJUiw88X9oHjhB9gsYSwDHKDNXjiV1Bfnb34uBKm7y&Signature=Pk9pzIYT%2B9uH%2B0YD1Cps7Da3h9o%3D";//这里填写android版本的下载地址
+				window.location.href = android_url;
+			}
+		}
+	}
+	close.onclick = function() {
+		tip.style.display = 'none';
+	}
+	$("#download_android").click(function(){
+		if(is_weixin) {
+			tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+			tip.style.display = 'block';
+		}else{
+			tip.style.display = 'none';
+			//判断iPhone|iPad|iPod|iOS
+			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+				alert("苹果系统不支持安卓软件！");
+			} else if (/(Android)/i.test(navigator.userAgent)) { 
+			    var android_url="https://dowlond-menggua-app.oss-cn-beijing.aliyuncs.com/dowlond/TurnAround.apk?Expires=1628930307&OSSAccessKeyId=TMP.3KdSb2MvJRLWSK8h9Rzaug5W6vSCQ1Ak6avHur75V3U44eqM81yFSJUiw88X9oHjhB9gsYSwDHKDNXjiV1Bfnb34uBKm7y&Signature=Pk9pzIYT%2B9uH%2B0YD1Cps7Da3h9o%3D";//这里填写android版本的下载地址
+				if(android_url!=""){
+					window.location.href = android_url;	
+				}else{
+					alert("安卓版本正在开发中，敬请期待！");
+				}
+			}
+		}
+	});
+
+	$("#download_ios").click(function(){
+		if(is_weixin) {
+			tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+			tip.style.display = 'block';
+		}else{
+			tip.style.display = 'none';
+			var ios_url="";//这里填写ios版本的下载地址
+			if(ios_url!=""){
+				window.location.href = ios_url;
+			}else{
+				alert("ios版本正在开发中，敬请期待！");
+			}
+		}
+	});
+	</script>
+    </body>
+</html>

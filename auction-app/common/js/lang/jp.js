@@ -1,0 +1,62 @@
+ /**简体中文**/
+ const japan={
+		lang:'zh',
+		language: '日本語(日本)',
+		loading: 'ロード中...',
+		confirmText:'確認',
+		cancelText:'キャンセルします',
+		login: {
+			title:'捜奇選択物',
+			titleSmall:'越境好物’は先に撮影して得ます',
+			login:'ログイン',
+			register:'登録',
+			next:'次のステップ',
+			forgetPwd:'パスワードを忘れます',
+			other:'以下のアカウントでログインします。',
+			noAccout:'口座がありませんか？',
+			Accout:'アカウントがあります！',
+			pleaceReg:'登録してください',
+			placeLogin:'ログインしてください',
+			phoneAccout:'携帯番号またはアカウント',
+			password:'パスワード(6-16ビット文字)',
+			phoneCode:'認証コードの入力',
+			getCode:'認証コード',
+			setPwd:'パスワードの設定',
+			countyPhone:'日本(+81)',
+			lang:'日本語(日本)',
+			authorize:'アカウントの授権に成功しました',
+			selectCounty:'所在国',
+			selectLang:'言語を選択',
+			imageUrl:'画像をアップロード',
+			ame:'ニックネーム',
+			goIndex:'はトップページに入ります'
+			
+		},
+		myCollection: '私のコレクション',
+		mine:{
+			mineTitle:'私',
+			personal:'個人情報',
+			bond:'マージン',
+			btn:'リチャージ/引き出し',
+			order:'注文',
+			allOrder:'すべての注文',
+			paid:'保留中',
+			delivered:'出荷待ち',
+			received:'入庫待ち',
+			completed:'完了',
+			other:'その他のサービス',
+			scene:'私の撮影場',
+			address:'出荷先住所',
+			bank:'銀行カード',
+			customer:'カスタマーサービスホットライン',
+			lang:'言語設定',
+			editPwd:'パスワードの変更',
+			account:'アカウントの関連付け',
+			about:'について',
+			avatar:'アバター',
+			nickname:'ニックネーム',
+			logOut:'ログアウト'
+		}
+}
+
+export default japan;

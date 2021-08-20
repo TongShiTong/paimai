@@ -1,0 +1,34 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.content {
+    display: flex;
+    padding-top: 3rem;
+}
+.ioc {
+    width: 50%;
+    font-size: 0.8rem;
+    padding-left: 1.6rem;
+}
+.android {
+    width: 50%;
+    font-size: 0.8rem;
+    padding-left: 0.3rem;
+}
+h3 {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+}
+.box {
+    min-height: 3rem;
+}
+li {
+    list-style: none;
+    margin-top: 0.3rem;
+}
+a {
+    text-decoration: none;
+    color: #000;
+    font-size: 0.8rem;
+}

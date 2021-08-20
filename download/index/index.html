@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no">
+    <title>萌地瓜App下载</title>
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            font-size: 13.3333333333333vw;
+            /* 1rem = 100px */
+        }
+        .content {
+            width: 100%;
+            height: 100%;
+            background: url(./img/bj.png) no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+        }
+        .box {
+            padding-top: 3.94rem;
+            padding-bottom: 4.52rem;
+
+        }
+        a {
+            display: block;
+            width: 4.62rem;
+            height: 0.96rem;
+            background: #ffffff;
+            border-radius: 0.48rem;
+            margin: 0 auto;
+            text-decoration: none;
+        }
+        a:last-child {
+            margin-top: 0.6rem;
+        }
+        .info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .info img {
+            width: 0.48rem;
+            height: 0.48rem;
+            margin-right: 0.28rem;
+        }
+        .info span {
+            font-size:0.34rem;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+            color:rgba(34,34,34,1);
+            letter-spacing: 0.02rem;
+        }
+        a[title="站长统计"] {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+        }
+        .logo {
+            text-align: center;
+        }
+        .logo img {
+            width: 2.9rem;
+            height: 2.9rem;
+            margin-top: 2.36rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="logo">
+            <img src="./img/logo1.png" alt="">
+        </div>
+        <div class="box">
+            <a href="javascript:void(0);" rel="nofollow" onclick="appDownLink(this,0)">
+                <div class="info">
+                    <img src="./img/Android.png" alt="">
+                    <span>Android版下载</span>
+                </div>
+                
+            </a>
+            <a href="javascript:void(0);" rel="nofollow" onclick="appDownLink(this,1)">
+                <div class="info">
+                    <img src="./img/iPhone.png" alt="">
+                    <span>iPhone版下载</span>
+                </div>
+               
+            </a>
+        </div>
+        
+    </div>
+    <div class="prompt" style="width: 100%;height: 100%;position: fixed;top: 0;z-index: 1000;background-color: #000;opacity: 0.8;display: none;">
+        <img style="width: 100%;" src="./img/share.png" alt="">
+    </div>
+</body>
+<script src="./jquery.1.11.3.js"></script>
+<script type="text/javascript">
+    $(".prompt").click(function(e) {
+
+        $(".prompt").css('display','none')
+    });
+    function appDownLink(dom,id){
+        if(id==0) {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i) == 'micromessenger' || ua.match(/_SQ_/i) == '_sq_'){
+                $(".prompt").css('display','block')
+            }else{
+                $(dom).attr('href','https://koali.oss-cn-hangzhou.aliyuncs.com/apk/mdg-release-gf.apk')
+            }
+        }else if(id==1) {
+            $(dom).attr('href','https://apps.apple.com/cn/app/%E8%90%8C%E5%9C%B0%E7%93%9C-%E4%B9%B0-%E8%B6%85%E8%8E%B7%E5%BE%97%E6%84%9F/id1494450529')
+        }else {
+
+        }
+        
+    }
+    function setRem() {
+      var deviceWidth = document.documentElement.clientWidth;
+      document.documentElement.style.fontSize = deviceWidth/7.5 + "px";
+    }
+    setRem();
+  
+    window.onresize = setRem;
+</script>
+<script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1279123151&web_id=1279123151"></script>
+</html>
